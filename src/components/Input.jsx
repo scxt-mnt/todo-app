@@ -1,29 +1,24 @@
-import { useState } from "react";
-import { useDispatch  } from "react-redux"
-import { setUserValues } from "../userSlice";
-
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addUser } from '../userSlice';
 
 const Input = () => {
-const dispatch = useDispatch();
-const [data, setData] = useState("");
-const [age, setAge] = useState("");
+    const dispatch = useDispatch()
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+ 
+    const handleClick = () => {
+        dispatch(addUser({name, email}))
+    }
 
-
-
-const handleClick = (e) => {
-    e.preventDefault()
-    if(age) {                                                                                                                                                                                                                                                                                                                                                                                                            
-      dispatch(setUserValues({age: age, name: data}))
-}}
   return (
-  <>
-  <form onSubmit={handleClick}>
-  <input value={data} onChange={(e) => setData(e.target.value)}   placeholder='yourName' type="text" /><br/>
-  <input value={age} onChange={(e) => setAge(e.target.value) }></input> <br/>
-  <button>add</button>
-  </form>
-  </>
+   <>
+    <input value={name} onChange={(e) => setName(e.target.value)} type='text' /><br/>
+    <input value={email} onChange={(e) => setEmail(e.target.value)} type='text'/>
+    <button onClick={handleClick}>add</button>
+   </>
   )
-
 }
+
+
 export default Input

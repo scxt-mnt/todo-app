@@ -1,33 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 const initialState = {
     value: []
 }
 
 const slice = createSlice({
-    name: "user",
+    name: "Todos",
     initialState,
     reducers: {
-        addUser: (state, action) => {
-            const lastUser = state.value[state.value.length - 1]
-            const newid = lastUser ? lastUser.id + 1 : 1
+        addTodos: (state, action) => {
+            const lastTodos = state.value[state.value.length - 1];
+            const check = lastTodos ? lastTodos.id + 1 : 1;
 
-            const newUser = {
-                id: newid,
+            const newTodos = {
+                id: check,
                 ...action.payload
             }
-            state.value.push(newUser)
+
+
+            state.value.push(newTodos)
         },
-        deleteUser: (state, action) => {
-            state.value = state.value.filter(users => users.id !== action.payload)
+        deleteTodos: (state, action) => {
+          state.value = state.value.filter(state => state.id !== action.payload.id)
         },
-        updateEmail: (state, action) => {
-            const { id, email } = action.payload
-            state.value = state.value.map(user =>
-                user.id === id ? { ...user, email } : False)
+        updateTodos: (state, action) => {
+            const {id, todo} = action.payload
+            state.value = state.value.map((update) =>
+                 update.id === id ? {...update, todo} : update )
         }
     }
 })
 
 export default slice.reducer;
-export const { addUser, deleteUser, updateEmail } = slice.actions; 
+export const { addTodos, deleteTodos, updateTodos } = slice.actions;

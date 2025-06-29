@@ -1,24 +1,27 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { addUser } from '../userSlice';
+import { addTodos } from '../userSlice';
+
 
 const Input = () => {
-    const dispatch = useDispatch()
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
- 
-    const handleClick = () => {
-        dispatch(addUser({name, email}))
-    }
-
+  const [todo, setTodo] = useState("");
+  const dispatch = useDispatch();
+  const handleTodo = (e) => {
+    e.preventDefault()
+    dispatch(addTodos({ todo: todo }))
+  }
   return (
-   <>
-    <input value={name} onChange={(e) => setName(e.target.value)} type='text' /><br/>
-    <input value={email} onChange={(e) => setEmail(e.target.value)} type='text'/>
-    <button onClick={handleClick}>add</button>
-   </>
+    <>
+
+      <form onSubmit={handleTodo} className='w-[19rem] h-[21rem] grid text-black place-items-center gap-1 m-10 border border-black p-0 rounded-xl'>
+        <h1 className=' transform font-bold text-4xl'>Todo</h1>
+        <textarea placeholder='what are you going to do?' className='bg-white border border-black w-60 outline-none max-h-[9rem] rounded-xl text-center p-5' type='text' value={todo} onChange={(e) => setTodo(e.target.value)} />
+        <button className=' w-20 h-[35px] bg-black text-white m-0 rounded-md'>addTodo</button>
+      </form>
+
+
+    </>
   )
 }
-
 
 export default Input

@@ -1,13 +1,13 @@
 import Display from "./components/Display"
 import Input from "./components/Input"
-
-
 function App() {
 
   return (
     <>
-    <Display/>
-    <Input/>
+     <main className='h-screen font-poppins grid place-items-center'>
+      <Input />
+      <Display />
+      </main>
     </>
   )
 }

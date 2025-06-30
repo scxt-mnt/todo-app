@@ -36,8 +36,8 @@ const Display = () => {
       <button className='bg-black text-white h-10 w-[100px] rounded-xl hover:bg-green-900 transition duration-1000' onClick={handleDropDown}>{`todo List ${dropDown ? ": " : ":"} ${length}`}</button>
       {dropDown === true && (
 
-        <main className='absolute  overflow-y-auto grid bg-white border 
-      border-gray-400 shadow-2xl h-[38rem] w-[20rem] m-0 place-items-center gap-2 rounded-xl pb-10  '>
+        <main className='absolute overflow-y-auto grid bg-white border 
+      border-gray-400 shadow-2xl h-[38rem] w-[20rem] m-0 place-items-center gap-2 rounded-xl pb-10 '>
 
 
           <section className='w-full flex justify-end self-start sticky top-0 h-3 m-1 pr-2 z-10 text-3xl z-10 text-red-500'>
@@ -52,17 +52,27 @@ const Display = () => {
           {selector.map((state) =>
 
 
-            <section className='grid relative  place-items-center min-w-[280px] max-w-[280px] min-h-[150px] h-[150px] bg-white text-black rounded-xl m-0 shadow-lg border border-gray-500 p-5 overflow-auto self-start' key={state.id}>
+            <section className='grid relative  place-items-center min-w-[280px] max-w-[280px] min-h-[150px] h-[150px] bg-white text-black rounded-xl m-0 shadow-lg border border-gray-500  overflow-auto self-start p-0' key={state.id}>
 
-
-
-
-              <p className='font-bold text-xl bg-green-400 rounded-md break-all '>{state.todo}</p>
-
-              <section className='sticky flex justify-end top-0 font-bold text-lg'>
+              <section className='sticky flex justify-end top-0 font-bold text-lg self-start w-full h-1 pr-2'>
                 <button onClick={() => { dispatch(deleteTodos({ id: state.id })), setId(state.id), setId(null) }
                 }>x</button><br />
               </section>
+
+                <section className='sticky top-0 flex w-[200px] transform -translate-x-[30px]  self-start justify-start -mt-10'>
+                <button onClick={() => {
+                  setId(state.id)
+                  setIsTrue(!isTrue)
+                  setUpdate(state.todo)
+                  isTrue ? setId(null) : false
+                }}> {id === state.id ? <p className='text-red-500 '>X</p> : <p>edit</p>}
+                </button>
+              </section>
+
+
+              <p className='font-bold text-xl bg-green-400 rounded-md break-all mt-5 mr-3 ml-3 mb-5 p-2 self-start'>{state.todo ? state.todo : "no input"}</p>
+
+
 
 
               {id === state.id && (
@@ -73,13 +83,7 @@ const Display = () => {
                   </section>
                 </>
               )}
-              <button className='absolute  bottom-[1px] left-[10px] translate-y-[3px]' onClick={() => {
-                setId(state.id)
-                setIsTrue(!isTrue)
-                setUpdate(state.todo)
-                isTrue ? setId(null) : false
-              }}> {id === state.id ? <p className='text-red-500 '>X</p> : <p>edit</p>}
-              </button>
+            
             </section>
           )}</main>)}
     </>

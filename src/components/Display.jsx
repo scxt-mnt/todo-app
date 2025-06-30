@@ -17,6 +17,8 @@ const Display = () => {
 
   const handleUpdate = () => {
     dispatch(updateTodos({ id: id, todo: update }))
+    setId(null)
+
   }
 
   const handleDropDown = () => {
@@ -34,45 +36,52 @@ const Display = () => {
       <button className='bg-black text-white h-10 w-[100px] rounded-xl hover:bg-green-900 transition duration-1000' onClick={handleDropDown}>{`todo List ${dropDown ? ": " : ":"} ${length}`}</button>
       {dropDown === true && (
 
-        <div className='absolute  overflow-y-auto grid bg-white border 
-      border-black h-[38rem] w-[20rem] m-0 place-items-center gap-2 rounded-xl pt-10'>
+        <main className='absolute  overflow-y-auto grid bg-white border 
+      border-gray-400 shadow-2xl h-[38rem] w-[20rem] m-0 place-items-center gap-2 rounded-xl pb-10  '>
 
-          {length === 0 ? <h1 className='text-black w-19 h-10 text-xl'>no to-do listed</h1> : null}
 
-          <button onClick={handleClose} className='absolute w-1 h-1 text-3xl right-[25px] top-[5px]'>X</button>
+          <section className='w-full flex justify-end self-start sticky top-0 h-3 m-1 pr-2 z-10 text-3xl z-10 text-red-500'>
+            <button onClick={handleClose}>X</button>
+          </section>
+
+          <section className='self-start'>
+            {length === 0 ? <h1 className='text-black  text-xl'>no to-do listed</h1> : null}
+          </section>
 
 
           {selector.map((state) =>
 
 
-            <div className='  grid place-content-center min-w-[150px] max-w-auto h-[200px] bg-black text-white gap-10' key={state.id}>
+            <section className='grid relative  place-items-center min-w-[280px] max-w-[280px] min-h-[150px] h-[150px] bg-white text-black rounded-xl m-0 shadow-lg border border-gray-500 p-5 overflow-auto self-start' key={state.id}>
 
 
 
-              <section >
-                <p >{state.todo}</p>
+
+              <p className='font-bold text-xl bg-green-400 rounded-md break-all '>{state.todo}</p>
+
+              <section className='sticky flex justify-end top-0 font-bold text-lg'>
                 <button onClick={() => { dispatch(deleteTodos({ id: state.id })), setId(state.id), setId(null) }
-                }>delete</button><br />
+                }>x</button><br />
               </section>
-
 
 
               {id === state.id && (
                 <>
-
-                  <input value={update} onChange={(e) => setUpdate(e.target.value)} type="text" />
-                  <button onClick={handleUpdate}>update</button>
+                  <section className='absolute grid '>
+                    <textarea className='w-[13rem] h-[6rem]   whitespace-auto border border-red-300 p-2' value={update} onChange={(e) => setUpdate(e.target.value)} type="text" />
+                    <button onClick={handleUpdate}>update</button>
+                  </section>
                 </>
               )}
-              <button onClick={() => {
+              <button className='absolute  bottom-[1px] left-[10px] translate-y-[3px]' onClick={() => {
                 setId(state.id)
                 setIsTrue(!isTrue)
                 setUpdate(state.todo)
                 isTrue ? setId(null) : false
-              }}> {id === state.id ? "X" : "edit"}
+              }}> {id === state.id ? <p className='text-red-500 '>X</p> : <p>edit</p>}
               </button>
-            </div>
-          )}</div>)}
+            </section>
+          )}</main>)}
     </>
   )
 }

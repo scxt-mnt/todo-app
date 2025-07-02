@@ -13,8 +13,8 @@ const Input = () => {
   return (
     <>
 
-      <form onSubmit={handleTodo} className='w-[19rem] h-[21rem] grid text-black place-items-center gap-1 m-10 border border-black p-0 rounded-xl'>
-        <h1 className=' transform font-bold text-4xl'>Todo</h1>
+      <form onSubmit={handleTodo} className='w-[19rem] h-[25rem] grid text-black place-items-center gap-1  border border-grey-300 shadow-2xl p-0 rounded-xl'>
+        <h1 className=' transform font-bold text-4xl '>Todo</h1>
         <textarea placeholder='what are you going to do?' className='bg-white border border-black w-60 outline-none max-h-[9rem] rounded-xl text-center p-5' type='text' value={todo} onChange={(e) => setTodo(e.target.value)} />
         <button className=' w-20 h-[35px] bg-black text-white m-0 rounded-md'>addTodo</button>
       </form>

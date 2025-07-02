@@ -8,7 +8,7 @@ const Display = () => {
   const selector = useSelector((state) => state.todo.value)
   const dispatch = useDispatch();
   const [update, setUpdate] = useState();
-  const [id, setId] = useState();
+  const [id, setId] = useState(null);
   const [isTrue, setIsTrue] = useState(false)
   const [dropDown, setDropDown] = useState(false)
 
@@ -18,7 +18,7 @@ const Display = () => {
   const handleUpdate = () => {
     dispatch(updateTodos({ id: id, todo: update }))
     setId(null)
-
+    setIsTrue(false)
   }
 
   const handleDropDown = () => {
@@ -59,7 +59,7 @@ const Display = () => {
                 }>x</button><br />
               </section>
 
-                <section className='sticky top-0 flex w-[200px] transform -translate-x-[30px]  self-start justify-start -mt-10'>
+              <section className='absolute top-10 flex w-[200px] transform self-start justify-start -mt-10 ml-[-45px]'>
                 <button onClick={() => {
                   setId(state.id)
                   setIsTrue(!isTrue)
@@ -72,18 +72,38 @@ const Display = () => {
 
               <p className='font-bold text-xl bg-green-400 rounded-md break-all mt-5 mr-3 ml-3 mb-5 p-2 self-start'>{state.todo ? state.todo : "no input"}</p>
 
-
-
-
               {id === state.id && (
                 <>
+                  {isTrue === true && (
+                    <>
+                      <div className='absolute bg-white/10 h-[9rem] w-screen backdrop-filter backdrop-blur-lg' />
+
+                      <section className='absolute top-10 flex w-[200px] transform self-start justify-start -mt-10 ml-[-45px]'>
+                        <button onClick={() => {
+                          setId(state.id)
+                          setIsTrue(!isTrue)
+                          setUpdate(state.todo)
+                          isTrue ? setId(null) : false
+                        }}> <p className='text-red-500 '>X</p>
+                        </button>
+                      </section>
+
+                      {isTrue === true && (
+                        <p className='font-bold text-xl bg-green-400 rounded-md mt-5 mr-3 ml-3 mb-5 p-2 self-start h-[1rem]'>{state.todo ? state.todo : "no input"}</p>
+                      )}
+                    </>
+                  )}
+
                   <section className='absolute grid '>
                     <textarea className='w-[13rem] h-[6rem]   whitespace-auto border border-red-300 p-2' value={update} onChange={(e) => setUpdate(e.target.value)} type="text" />
                     <button onClick={handleUpdate}>update</button>
                   </section>
                 </>
               )}
-            
+
+
+
+
             </section>
           )}</main>)}
     </>

@@ -78,7 +78,8 @@ const Display = () => {
                     <>
                       <div className='absolute bg-white/10 h-[9rem] w-screen backdrop-filter backdrop-blur-lg' />
 
-                      <section className='absolute top-10 flex w-[200px] transform self-start justify-start -mt-10 ml-[-45px]'>
+                      <section className='absolute top-10 flex w-[200px] transform self-start justify-start -mt-10 ml-[-45px] truncate'>
+
                         <button onClick={() => {
                           setId(state.id)
                           setIsTrue(!isTrue)

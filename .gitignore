@@ -23,7 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 eslint.config.js
-package-lock.json
 package.json
 README.md
 vite.config.js

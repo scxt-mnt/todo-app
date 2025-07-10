@@ -1,4 +1,4 @@
-name: todo workflow
+name: todo-workflow
 
 on:
   push:
@@ -8,26 +8,25 @@ jobs:
   build: 
     runs-on: ubuntu-latest
     strategy: 
-        matrix:
-          node-version: [22.x]
+      matrix:
+        node-version: [22.x]
     steps:
       - name: clone repo
-
-      -  uses: actions/checkout@v4
-
+        uses: actions/checkout@v4
+      
       - name: setup nodejs
-      -  uses: actions/setup-node@v4
-         with: 
-          node-version:  ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with: 
+          node-version: ${{ matrix.node-version }}
 
       - name: clean install npm
-      - run: npm ci
+        run: npm ci
 
       - name: run build
-      - run: npm run build
+        run: npm run build
       
       - name: run test
-      - run: npm run test
+        run: npm run test
 
 
 

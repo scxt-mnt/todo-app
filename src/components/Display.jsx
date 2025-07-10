@@ -31,21 +31,21 @@ const Display = () => {
     setDropDown(false);
   }
   const handleSearch = (e) => {
-   e.preventDefault();
-   setTimeout(() => {
-    const look = selector.find((state) => state.todo.toLowerCase() === searchStore.toLowerCase());
+    e.preventDefault();
+    setTimeout(() => {
+      const look = selector.find((state) => state.todo.toLowerCase() === searchStore.toLowerCase());
 
-    if(look){
-      findEngine.current[look.id].scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      })
-    }
-   },100)
+      if (look) {
+        findEngine.current[look.id].scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        })
+      }
+    }, 100)
   }
+    console.log('ci/cd testing');
 
-  
-  
+
 
 
   return (
@@ -66,9 +66,9 @@ const Display = () => {
 
           <section className='self-start w-[300px] bg-black absolute top-2 '>
             {length === 0 ? <h1 className=' absolute 
-            text-black  text-xl transform translate-y-[270px] translate-x-[78px] '>no to-do listed</h1> :<> 
-            <form onSubmit={handleSearch}> <input 
-              placeholder='search your todos here!' type='text' className='absolute w-[200px] rounded-lg text-center outline-none border focus:border-green-500 shadow-xl border-gray-300 focus:shadow-green-300 focus:shadow-xl' value={searchStore} onChange={(e) => setSearchStore(e.target.value)} /> <button className='bg-green-500 absolute right-[28px] rounded-xl text-sm w-[70px] h-[25px] top-[1px]'>search</button></form></>}
+            text-black  text-xl transform translate-y-[270px] translate-x-[78px] '>no to-do listed</h1> : <>
+              <form onSubmit={handleSearch}> <input
+                placeholder='search your todos here!' type='text' className='absolute w-[200px] rounded-lg text-center outline-none border focus:border-green-500 shadow-xl border-gray-300 focus:shadow-green-300 focus:shadow-xl' value={searchStore} onChange={(e) => setSearchStore(e.target.value)} /> <button className='bg-green-500 absolute right-[28px] rounded-xl text-sm w-[70px] h-[25px] top-[1px]'>search</button></form></>}
           </section>
 
 
@@ -95,7 +95,7 @@ const Display = () => {
 
               {state.todo ? <p className='font-bold text-xl bg-green-400 rounded-md break-all mt-5 mr-3 ml-3 mb-5 p-2 self-start'>{state.todo}</p> : <p className='bg-red-500 rounded-md mt-5 mr-3 ml-3 mb-5 p-2 self-start'> no input </p>}
 
-              { id === state.id && (
+              {id === state.id && (
                 <>
                   {isTrue === true && (
                     <>

@@ -94,7 +94,7 @@ const Display = () => {
           {selector.map((state) =>
 
 
-            <section className='grid relative  place-items-center min-w-[280px] max-w-[280px] min-h-[150px] h-[150px] bg-white text-black rounded-xl m-2 shadow-2xl border border-gray-200  overflow-auto self-start p-0' ref={e => searchEngine.current[state.id] = e} >
+            <section className={`grid relative  place-items-center min-w-[280px] max-w-[280px] min-h-[150px] h-[150px] bg-white text-black rounded-xl m-2 shadow-2xl border border-gray-200 ${isTrue? 'overflow-hidden' : 'overflow-auto'}  self-start p-0`} ref={e => searchEngine.current[state.id] = e} >
 
               <section className='sticky flex justify-end top-0 font-bold text-lg self-start w-full h-1 pr-2'>
                 <button onClick={() => { dispatch(deleteTodos({ id: state.id })), setId(state.id), setId(null) }
@@ -118,7 +118,7 @@ const Display = () => {
                 <>
                   {isTrue === true && (
                     <>
-                      <div className='absolute bg-white/10 h-[9rem] w-screen backdrop-filter backdrop-blur-lg' />
+                      <div className='absolute bg-white/10 h-[9rem] h-screen w-screen backdrop-filter backdrop-blur-lg' />
 
                       <section className='absolute top-10 flex w-[200px] transform self-start justify-start -mt-10 ml-[-45px] truncate'>
 

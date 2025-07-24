@@ -1,7 +1,7 @@
-import {useState, useRef} from 'react'
+import { useState, useRef } from 'react'
 import { useSelector } from 'react-redux';
 import styles from './Visibility.module.css';
-const SearchBar = ({searchEngine, length}) => {
+const SearchBar = ({ searchEngine, length }) => {
   const [searchStore, setSearchStore] = useState('');
   const noMatch = useRef();
   const blanks = useRef();
@@ -9,7 +9,7 @@ const SearchBar = ({searchEngine, length}) => {
 
 
 
-    const handleSearch = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setTimeout(() => {
       const lookFor = selector.find(items => items.todo.toLowerCase().trim() === searchStore.toLowerCase().trim());
@@ -20,12 +20,16 @@ const SearchBar = ({searchEngine, length}) => {
             block: 'center',
             behavior: 'smooth',
           })
+
         if (searchStore === "") {
           blanks.current.style.display = 'block'
+          
         }
       }
-      else {
+
+      else if (!lookFor) {
         noMatch.current.style.display = 'block'
+        blanks.current.style.display = 'none';
       }
       console.log(lookFor)
     }, 100)
@@ -33,20 +37,20 @@ const SearchBar = ({searchEngine, length}) => {
   }
 
 
-    return (
-        <>
-                {length === 0 ? <h1 className=' absolute 
+  return (
+    <>
+      {length === 0 ? <h1 className=' absolute 
                   text-black  text-xl transform translate-y-[270px] translate-x-[78px] '>no to-do listed</h1> : <>
-                    <form onSubmit={handleSearch}>
-                        <input
-                            placeholder='search your todos here!' type='text' className='absolute w-[200px] rounded-lg text-center outline-none border focus:border-green-500 shadow-xl border-gray-300 focus:shadow-green-300 focus:shadow-xl' value={searchStore} onChange={(e) => setSearchStore(e.target.value)} /> <button className='bg-green-500 absolute right-[28px] rounded-xl text-sm w-[70px] h-[25px] top-[1px]'>search</button></form>
-                    <p ref={blanks} className={`${styles.noMatch} text-red-500 tranform translate-y-6 text-[13px]`}>your search bar is blank</p>
-                    <p ref={noMatch} className={`${styles.noMatch} text-red-500 tranform translate-y-6 text-[13px]`}>no match found</p>
+        <form onSubmit={handleSearch}>
+          <input
+            placeholder='search your todos here!' type='text' className='absolute w-[200px] rounded-lg text-center outline-none border focus:border-green-500 shadow-xl border-gray-300 focus:shadow-green-300 focus:shadow-xl' value={searchStore} onChange={(e) => setSearchStore(e.target.value)} /> <button className='bg-green-500 absolute right-[28px] rounded-xl text-sm w-[70px] h-[25px] top-[1px]'>search</button></form>
+        <p ref={blanks} className={`${styles.noMatch} text-red-500 tranform translate-y-6 text-[13px] ml-2`}>your search bar is blank</p>
+        <p ref={noMatch} className={`${styles.noMatch} text-red-500 tranform translate-y-6 text-[13px] ml-2`}>no match found</p>
 
-                </>}
+      </>}
 
-        </>
-    )
+    </>
+  )
 }
 
 export default SearchBar
